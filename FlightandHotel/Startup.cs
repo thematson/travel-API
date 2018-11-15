@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using FlightandHotel.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace FlightandHotel
 {
@@ -24,6 +20,9 @@ namespace FlightandHotel
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddDbContext<FlightAndHotelContext>(options =>
+                options.UseSqlite("Data Source=FlightHotel.db"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
