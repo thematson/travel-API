@@ -19,6 +19,14 @@ namespace FlightandHotel
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(c => c.AddPolicy("CorsPolicy", builder =>
+            {
+                builder.AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowAnyOrigin()
+                .AllowCredentials();
+            }));
+
             services.AddMvc();
 
             services.AddDbContext<FlightAndHotelContext>(options =>
@@ -32,6 +40,8 @@ namespace FlightandHotel
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("CorsPolicy");
 
             app.UseMvc();
         }
